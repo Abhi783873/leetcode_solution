@@ -1,0 +1,43 @@
+#include <stdlib.h>
+
+char* processStr(char* s) {
+    char *ans = (char*)malloc(1000000);
+    int len = 0;
+    int i, j;
+
+    for (i = 0; s[i] != '\0'; i++) {
+        if (s[i] >= 'a' && s[i] <= 'z') {
+            ans[len] = s[i];
+            len++;
+        }
+
+        else if (s[i] == '*') {
+            if (len > 0)
+                len--;
+        }
+
+        else if (s[i] == '#') {
+            int oldLen = len;
+
+            for (j = 0; j < oldLen; j++) {
+                ans[len] = ans[j];
+                len++;
+            }
+        }
+         else if (s[i] == '%') {
+            for (j = 0; j < len / 2; j++) {
+                char temp = ans[j];
+                ans[j]=ans[len-1-j];
+                ans[len-1-j]=temp;
+               
+                
+            }
+
+
+       
+        }
+    }
+
+    ans[len]='\0';   
+    return ans;
+}
